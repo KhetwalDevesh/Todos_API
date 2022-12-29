@@ -3,8 +3,8 @@ const Todos = require('../models/Todos');
 // get all Todos
 exports.getTodos = async (req, res, next) => {
   try {
-    // const todos = await Todos.find();
-    res.status(200).json({ success: true, data: 'get all todos' });
+    const todos = await Todos.find();
+    res.status(200).json({ success: true, data: todos });
   } catch (error) {
     res.status(400).json({ success: false });
     console.log(error);
@@ -27,7 +27,7 @@ exports.createTodo = async (req, res, next) => {
     const todo = await Todos.create(req.body);
     res.status(201).json({ success: true, data: todo });
   } catch (error) {
-    res.status(400).json({ success: false });
+    res.status(400).json({ success: false, error: error });
   }
 };
 
